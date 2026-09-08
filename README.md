@@ -1,1 +1,1 @@
-# latihan-1-strukdat
+# Lab Struktur Data
