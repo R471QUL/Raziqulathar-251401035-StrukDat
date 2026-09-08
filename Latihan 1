@@ -1,1 +1,29 @@
+#include <iostream>
+using namespace std;
 
+int main() {
+    int arr[3][3][4];
+    int nilai = 2;
+
+    for (int lapisan = 0; lapisan < 3; lapisan++) {
+        for (int baris = 0; baris < 3; baris++) {
+            for (int kolom = 0; kolom < 4; kolom++) {
+                arr[lapisan][baris][kolom] = nilai;
+                nilai += 2;
+            }
+        }
+    }
+
+    for (int lapisan = 0; lapisan < 3; lapisan++) {
+        cout << " Lapisan " << (lapisan + 1) << endl;
+        for (int baris = 0; baris < 3; baris++) {
+            for (int kolom = 0; kolom < 4; kolom++) {
+                cout << arr[lapisan][baris][kolom] << "\t";
+            }
+            cout << endl;
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
