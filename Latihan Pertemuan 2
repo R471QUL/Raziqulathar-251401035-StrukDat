@@ -1,1 +1,129 @@
+#include <iostream>
+using namespace std;
 
+struct node {
+    int data;
+    node* next;
+};
+
+int main () {
+    // membuat linked list awal dari 10 nilai mahasiswa
+    int nilai[10] = {100, 92, 45, 87, 71, 99, 95, 60, 55, 88};
+
+    node* head = nullptr;
+    node* tail = nullptr;
+
+    for (int i = 0; i < 10; i++) {
+        node* baru = new node();
+        baru->data = nilai[i];
+        baru->next = nullptr;
+
+        if (head == nullptr) {
+            head = baru;
+            tail = baru;
+        } else {
+            tail->next = baru;
+            tail = baru;
+        }
+    }
+
+    // menampilkan isi linked list
+    node* temp = head;
+
+    cout << "data awal                     : ";
+    temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+
+    // menambahkan node baru di depan (70)
+    node* node70 = new node();
+    node70->data = 70;
+    node70->next = head;
+    head = node70;
+
+    cout << "setelah 70 ditambah di depan  : ";
+    temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+
+    // menambahkan node baru di belakang (50)
+    node* node50 = new node();
+    node50->data = 50;
+    node50->next = nullptr;
+
+    tail->next = node50;
+    tail = node50;
+
+    cout << "setelah 50 ditambah di belakang: ";
+    temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+
+    // menambahkan node baru setelah nilai 45
+    temp = head;
+    while (temp->data != 45) {
+        temp = temp->next;
+    }
+
+    node* node0 = new node();
+    node0->data = 0;
+    node0->next = temp->next;
+    temp->next = node0;
+
+    cout << "setelah 0 ditambah sesudah 45 : ";
+    temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+
+    // menghapus node dengan nilai 99
+    temp = head;
+    while (temp->next->data != 99) {
+        temp = temp->next;
+    }
+
+    node* hapus = temp->next;
+    temp->next = hapus->next;
+    if (hapus == tail) tail = temp;
+    delete hapus;
+
+    cout << "setelah 99 dihapus            : ";
+    temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+
+    // menghapus node dengan nilai 60
+    temp = head;
+    while (temp->next->data != 60) {
+        temp = temp->next;
+    }
+
+    hapus = temp->next;
+    temp->next = hapus->next;
+    if (hapus == tail) tail = temp;
+    delete hapus;
+
+    cout << "setelah 60 dihapus            : ";
+    temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+
+    return 0;
+}
