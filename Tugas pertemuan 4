@@ -1,0 +1,89 @@
+#include <iostream>
+using namespace std;
+
+struct node {
+    int data;
+    node* kiri;
+    node* kanan;
+};
+
+node* root = nullptr;
+
+// Membuat node baru
+node* buatNode(int nilai) {
+    node* baru = new node();
+    baru->data = nilai;
+    baru->kiri = nullptr;
+    baru->kanan = nullptr;
+    return baru;
+}
+
+// Menyisipkan nilai ke dalam tree
+node* sisipkan(node* akar, int nilai) {
+    if (akar == nullptr) {
+        return buatNode(nilai);
+    }
+
+    if (nilai < akar->data) {
+        akar->kiri = sisipkan(akar->kiri, nilai);
+    } else if (nilai > akar->data) {
+        akar->kanan = sisipkan(akar->kanan, nilai);
+    }
+    // jika nilai sama, diabaikan (tidak ada duplikat)
+
+    return akar;
+}
+
+// Pre-order: root -> kiri -> kanan
+void preOrder(node* akar) {
+    if (akar == nullptr) return;
+    cout << akar->data << " ";
+    preOrder(akar->kiri);
+    preOrder(akar->kanan);
+}
+
+// In-order: kiri -> root -> kanan
+void inOrder(node* akar) {
+    if (akar == nullptr) return;
+    inOrder(akar->kiri);
+    cout << akar->data << " ";
+    inOrder(akar->kanan);
+}
+
+// Post-order: kiri -> kanan -> root
+void postOrder(node* akar) {
+    if (akar == nullptr) return;
+    postOrder(akar->kiri);
+    postOrder(akar->kanan);
+    cout << akar->data << " ";
+}
+
+int main() {
+    int nilai;
+
+    cout << "Masukkan angka satu per satu (0 untuk berhenti):" << endl;
+
+    while (true) {
+        cout << "Input: ";
+        cin >> nilai;
+
+        if (nilai == 0) {
+            break;
+        }
+
+        root = sisipkan(root, nilai);
+    }
+
+    cout << "\nHasil Pre-order  : ";
+    preOrder(root);
+
+    cout << "\nHasil In-order   : ";
+    inOrder(root);
+
+    cout << "\nHasil Post-order : ";
+    postOrder(root);
+
+    cout << endl;
+
+    return 0;
+}
