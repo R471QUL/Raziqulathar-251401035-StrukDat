@@ -1,1 +1,61 @@
+#include <iostream>
+using namespace std;
 
+#define MAX 100
+
+class Stack {
+private:
+    char data[MAX];
+    int top;
+
+public:
+    Stack() {
+        top = -1;
+    }
+
+    bool isEmpty() {
+        return top == -1;
+    }
+
+    bool isFull() {
+        return top == MAX - 1;
+    }
+
+    void push(char nilai) {
+        if (isFull()) {
+            cout << "Stack penuh!" << endl;
+            return;
+        }
+        top++;
+        data[top] = nilai;
+    }
+
+    char pop() {
+        char nilai = data[top];
+        top--;
+        return nilai;
+    }
+};
+
+int main() {
+    string kata;
+    Stack stack;
+
+    cout << "Masukkan sebuah kata: ";
+    cin >> kata;
+
+    // Memasukkan setiap karakter ke dalam stack
+    for (int i = 0; i < kata.length(); i++) {
+        stack.push(kata[i]);
+    }
+
+    // Mengambil karakter dari stack untuk membentuk kata terbalik
+    string hasil = "";
+    while (!stack.isEmpty()) {
+        hasil += stack.pop();
+    }
+
+    cout << "Kata setelah dibalik: " << hasil << endl;
+
+    return 0;
+}
